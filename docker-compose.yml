@@ -1,0 +1,39 @@
+version: "3"
+
+# Definição dos services
+services:
+
+# Back-end service
+  back:
+    image: appcriptoback
+    environment:
+      - MYSQL_HOST=mysqlbd
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqlbd
+
+# Banco Service (Mysql)
+  mysqlbd:
+    image: bd
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+    volumes:
+      - db-data:/var/lib/mysql  
+# Front-end service
+  front:
+    image: appcriptouifront
+    ports:
+      - "3000:80"
+    depends_on:
+      - back
+
+  
+# Volumes
+volumes:
+  db-data:
+
+# Newtworks para facilitar a comunicação
+networks:
+  backend:
+  frontend:    
