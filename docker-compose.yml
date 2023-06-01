@@ -9,7 +9,7 @@ services:
     environment:
       - MYSQL_HOST=mysqlbd
     ports:
-      - "8080:8080"
+      - "4000:4000"
     depends_on:
       - mysqlbd
 
@@ -24,7 +24,7 @@ services:
   front:
     image: appcriptouifront
     ports:
-      - "3000:80"
+      - "8080:80"
     depends_on:
       - back
 
